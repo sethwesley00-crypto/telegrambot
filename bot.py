@@ -177,23 +177,21 @@ if __name__ == "__main__":
 
     TOKEN = os.getenv("BOT_TOKEN")
     PORT = int(os.environ.get("PORT", 8443))  # Render sets a PORT automatically
-
     app = ApplicationBuilder().token(TOKEN).build()
 
     # Handlers
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
 
-    # Webhook setup
+    # Webhook setup ONLY
     WEBHOOK_URL = f"https://telegrambot-lm09.onrender.com/{TOKEN}"
-
     print(f"🤖 Starting bot via webhook at {WEBHOOK_URL}...")
-
     app.run_webhook(
         listen="0.0.0.0",
         port=PORT,
         url_path=TOKEN,
         webhook_url=WEBHOOK_URL
     )
+
 
 
